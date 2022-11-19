@@ -1,6 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import {useReducer} from "react"
+import Navbar from './Component/Navbar';
+import { useContext } from 'react';
+import { ThemeContext } from './Context/ThemeContext';
 
 const initialState = 0;
 
@@ -18,12 +20,14 @@ const reducer = (state,action) =>{
 }
 
 function App() {
-
+  const {isLight} = useContext(ThemeContext)
 const [state,dispatch] = useReducer(reducer,initialState)
 
   return (
-    <div className="App">
-      <h1>Setup ready</h1>
+    <div className={`App ${isLight ? "light":"dark"}`}>
+      
+      <Navbar/>
+      <h1>Masai Counter</h1>
       <button onClick={()=>dispatch({type:"Increament"})}>+</button>
       {state}
       <button onClick={()=>dispatch({type:"Decreament"})}>-</button>
